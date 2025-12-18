@@ -1,1 +1,66 @@
-test
+class Raum:
+
+    def __init__(self, length, height):
+        self.layout = [[1 for col in range(length)] for row in range(height)] 
+
+    def create_maze():
+        
+    def zeichnen(view, l):
+        h = l // layout[].len()
+        w = l // layout.len()
+
+        for i in range(
+
+
+
+def start_game():
+    
+    l=900  # spielfeldgröße
+    view = SVGView(l,l)
+    pl = Player(l//2, l//2, 30, view)
+    running = True
+
+        
+    while running == True:
+        
+        key = view.last_key()
+        print("-------------")
+        print(key)
+        print(".")
+        print(view.pressed_key())
+
+        dx, dy = 0, 0
+        if view.pressed_key() == "ArrowDown":
+            dx, dy = 0, 1
+        elif key == "ArrowUp":
+            dx, dy = 0, -1
+        elif key == "ArrowLeft":
+            dx, dy = -1, 0
+        elif key == "ArrowRight":
+            dx, dy = 1, 0
+        elif key == "q":
+            game_end()
+            running = False
+        pl.set_dx(dx * pl.get_speed())
+        pl.set_dy(dy * pl.get_speed())
+
+        pl.bewegen()
+        
+        view.sync()
+
+
+
+from algoviz import AlgoViz
+from algoviz.svg import SVGView, Circle, Rect, Text
+from algoviz.gui import GUI, Button, Label, TextInput
+import random, math
+from player import Player
+
+start_game()
+#gui = GUI("main")
+
+#def on_click(element, event):
+    #start_game()
+
+#button = Button(gui, "start", 10, 10, 120, 20, "Start Game", on_click)
+
