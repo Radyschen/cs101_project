@@ -18,6 +18,10 @@ class Player:
         """Bewegt die Person in x- und y-Richtung entsprechend der eigenen d_x und d_y"""
         self._kreis.move_to(self._kreis.get_x() + self._d_x, self._kreis.get_y() + self._d_y)
 
+    def move_to(x,y):
+        self._kreis.move_to(x,y)
+       
+
     def get_x(self):
         return self._kreis.get_x()
     def get_y(self):

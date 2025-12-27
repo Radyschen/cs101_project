@@ -7,10 +7,38 @@ class Map:
         self.height = height  # arrayhöhe
         self.length = length  # arraybreite
         self.walls = []
+        self.create_maze()
         
     def create_maze(self):
         for i in range(self.length):
             self.layout[i][1] = 1
+
+    def create_lobby(self):
+        self.layout = [
+            [1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 1, 1, 0, 1, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1],
+        ]
+
+        
+    def create_end(self):
+        self.layout = [
+            [1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 0, 0, 1],
+            [1, 0, 1, 1, 1, 1, 0, 1],
+            [1, 0, 1, 0, 0, 1, 0, 1],
+            [1, 0, 1, 0, 0, 1, 0, 1],
+            [1, 0, 1, 0, 0, 1, 0, 1],
+            [1, 0, 0, 0, 0, 0, 0, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1],
+        ]
+
+
         
     def zeichnen(self, view, l):
         
@@ -22,5 +50,5 @@ class Map:
                 if self.layout[i][j] == 1:
                     rect = Rect(i*w, j*h, w, h, view)
                     rect.set_fill("white")
-                    rect.set_stroke_width(10)
+                    rect.set_stroke_width(5)
                     self.walls.append(rect)
