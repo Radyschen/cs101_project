@@ -8,7 +8,26 @@ class Map:
         self.length = length  # arraybreite
         self.walls = []
         self.create_maze()
+
+    def get_length(self):
+        return self.length
+
+    def get_height(self):
+        return self.height
+
+    def get_layout(self):
+        return self.layout
+
+    
+    def set_length(self, length):
+        self.length = length
+
+    def set_height(self, height):
+        self.height = height
         
+    def set_layout(self, layout):
+        self.layout = layout
+    
     def create_maze(self):
         for i in range(self.length):
             self.layout[i][1] = 1
@@ -47,7 +66,7 @@ class Map:
         
         for i in range(self.length):
             for j in range(self.height):
-                if self.layout[i][j] == 1:
+                if self.layout[j][i] == 1:
                     rect = Rect(i*w, j*h, w, h, view)
                     rect.set_fill("white")
                     rect.set_stroke_width(5)
