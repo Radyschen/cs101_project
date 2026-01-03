@@ -1,13 +1,15 @@
 from algoviz.svg import SVGView, Circle, Rect, Text
+from random import randrange
+import random
 
 class Map:
 
     def __init__(self, length, height):
-        self.layout = [[0 for col in range(height)] for row in range(length)] 
+        self.layout = [[1 for col in range(height)] for row in range(length)] 
         self.height = height  # arrayhöhe
         self.length = length  # arraybreite
         self.walls = []
-        self.create_maze()
+        
 
     def get_length(self):
         return self.length
@@ -28,10 +30,69 @@ class Map:
     def set_layout(self, layout):
         self.layout = layout
     
-    def create_maze(self):
-        for i in range(self.length):
-            self.layout[i][1] = 1
+    def create_maze(self, gegneranzahl):
+        # random punkte
+        ax = []
+        ay = []
+        for i in range(self.length*2):
+            ax.append(random.randint(1,self.length - 2))
+            ay.append(random.randint(1,self.length - 2))
 
+        # verbinden der random punkte durch tunnel
+        while len(ax) >= 2:
+            self.create_tunnel(ax[0], ay[0], ax[1], ay[1])
+            for i in range (2):
+                ax.pop(0)
+                ay.pop(0)
+
+
+
+        # mitte frei
+        mx = self.get_height() // 2
+        my = self.get_length() // 2
+
+        self.layout[mx][my] = 0
+        self.layout[mx+1][my] = 0
+        self.layout[mx][my+1] = 0
+        self.layout[mx+1][my+1] = 0
+
+
+        # gegnerfelder
+        self.add_gegner(gegneranzahl, mx, my)
+
+    
+    def create_tunnel(self, x1, y1, x2, y2):
+        self.layout[x1][y1] = 0
+        
+        while x1 != x2:
+            if x1 < x2:
+                x1 += 1
+                self.layout[x1][y1] = 0
+            else:
+                x1 -= 1
+                self.layout[x1][y1] = 0
+                
+        while y1 != y2:
+            if y1 < y2:
+                y1 += 1
+                self.layout[x1][y1] = 0
+            else:
+                y1 -= 1
+                self.layout[x1][y1] = 0
+
+    
+    def add_gegner(self, gegneranzahl, mx, my):
+        while gegneranzahl > 0:
+            x = random.randint(1,self.length - 1)
+            y = random.randint(1,self.length - 1)
+
+            if (self.layout[x][y] == 0) and ((x != mx) and (x != mx +1)) and ((y != my) and (y != my+1)):
+                self.layout[x][y] = 2
+                gegneranzahl -= 1
+            
+
+
+    
     def create_lobby(self):
         self.layout = [
             [1, 1, 1, 1, 1, 1, 1, 1],
@@ -71,3 +132,8 @@ class Map:
                     rect.set_fill("white")
                     rect.set_stroke_width(5)
                     self.walls.append(rect)
+                if self.layout[j][i] == 2:
+                    rect = Rect(i*w, j*h, w, h, view)
+                    rect.set_fill("red")
+                    rect.set_stroke_width(5)
+                
