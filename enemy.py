@@ -54,7 +54,7 @@ class Enemy:
 
         layout = self.feld.get_layout()
         l = 1000
-        tile_height = l // len(layout[0])w
+        tile_height = l // len(layout[0])
         tile_length = l // len(layout)
 
         next_tile_x = int(next_x / tile_length)
