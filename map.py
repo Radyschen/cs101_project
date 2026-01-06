@@ -98,7 +98,7 @@ class Map:
             [1, 1, 1, 1, 1, 1, 1, 1],
             [1, 0, 0, 0, 0, 0, 0, 1],
             [1, 0, 1, 1, 0, 1, 0, 1],
-            [1, 0, 0, 0, 0, 1, 0, 1],
+            [1, 0, 1, 0, 0, 1, 0, 1],
             [1, 0, 0, 0, 0, 1, 0, 1],
             [1, 0, 0, 0, 0, 1, 0, 1],
             [1, 0, 0, 0, 0, 0, 0, 1],
@@ -129,11 +129,11 @@ class Map:
             for j in range(self.height):
                 if self.layout[j][i] == 1:
                     rect = Rect(i*w, j*h, w, h, view)
-                    rect.set_fill("white")
-                    rect.set_stroke_width(5)
+                    rect.set_fill("grey")
+                    rect.set_stroke_width(3)
                     self.walls.append(rect)
                 if self.layout[j][i] == 2:
                     rect = Rect(i*w, j*h, w, h, view)
-                    rect.set_fill("red")
-                    rect.set_stroke_width(5)
+                    rect.set_fill_rgb( 255, 0, 0, 0.5)
+                    rect.set_stroke_width(1)
                 

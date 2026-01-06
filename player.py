@@ -10,7 +10,7 @@ class Player:
         self._kreis.set_fill("lightblue")
         #self._status = status
         #self._gesundungs_zeit = gesundungs_zeit
-        self._speed = 10
+        self._speed = 8
         self._d_x = 0
         self._d_y = 0
         self._hp = 2 # Leben/health points
