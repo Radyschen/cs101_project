@@ -57,7 +57,7 @@ class Player:
     def lose_hp(self, n):
         self._hp = self.get_hp() - n
 
-    def to_front():
+    def to_front(self):
         self._kreis.to_front()
 
     def bewegen(self):
