@@ -106,7 +106,7 @@ class Enemy:
 
 
     def circle_collides(self, x, y):
-        r = self.radius - 1
+        r = self.radius
     
         points = [
             # links rechts unten oben
@@ -183,13 +183,26 @@ class Enemy:
 
 
 
-        
+
+    def hits_player(self, px, py):
+        dx = px - self.get_x()
+        dy = py - self.get_y()
+    
+        dist = math.sqrt(dx*dx + dy*dy)
+
+        if dist <= self.get_radius() * 2:
+            return True
+            
+        return  False
     
     def move_to(x,y):
         self._kreis.move_to(x,y)
 
-    def lose_life(self):
-        self.lifes = self.get_lifes() - 1
+    def lose_life(self, n):
+        self.lifes = self.get_lifes() - n
+        return self.lifes
+
+    
         
     def get_x(self):
         return self._kreis.get_x()
