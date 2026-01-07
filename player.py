@@ -208,7 +208,7 @@ class Player:
 
         if pressed_key == "space" and delta > self._cooldown:
 
-            set_last_attack_time(jetzt)
+            self.set_last_attack_time(jetzt)
             
             x = self.get_x()
             y = self.get_y()
