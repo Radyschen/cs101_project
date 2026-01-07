@@ -8,12 +8,14 @@ class Player:
         self._raum = raum
         self._kreis = Circle(x, y, radius, raum)
         self._kreis.set_fill("lightblue")
-        #self._status = status
-        #self._gesundungs_zeit = gesundungs_zeit
         self._speed = 8
         self._d_x = 0
         self._d_y = 0
-        self._hp = 2 # Leben/health points
+        self._hp = 100 # Leben/health points
+        self._attack_radius_ratio = 2
+        self._last_attack_time = 0
+        self._last_hit = 0
+        self._cooldown = 0.5
 
     def get_x(self):
         return self._kreis.get_x()
@@ -33,6 +35,8 @@ class Player:
         return self._speed
     def get_hp(self):
         return self._hp
+    def get_last_attack_time(self):
+        return self._last_attack_time
     
     def set_x(self, x):
         self._kreis.set_x(x)
@@ -48,6 +52,13 @@ class Player:
         self._speed = speed
     def set_hp(self, hp):
         self._hp = hp
+    def set_last_attack_time(self, time):
+        self._last_attack_time = time
+    def lose_hp(self, n):
+        self._hp = self.get_hp() - n
+
+    def to_front():
+        self._kreis.to_front()
 
     def bewegen(self):
         """Bewegt die Person in x- und y-Richtung entsprechend der eigenen d_x und d_y"""
@@ -187,3 +198,45 @@ class Player:
     
             # sonst, wenn nein, gib 0 aus
             # so könnte man steuern, dass er bis Anschlag zur Wand geht
+
+    def attack(self, jetzt, gegner):
+
+        delta = jetzt - self._last_attack_time
+        
+        pressed_key : str = self._raum.pressed_key()
+        # wenn space gedrückt wird und die letzte Attacke nicht länger als der cooldown her ist
+
+        if pressed_key == "space" and delta > self._cooldown:
+
+            set_last_attack_time(jetzt)
+            
+            x = self.get_x()
+            y = self.get_y()
+            attack_radius = self.get_radius() * self._attack_radius_ratio
+
+            # Area of Effect der Attacke
+            circle = Circle(x, y, attack_radius, raum)
+            circle.set_fill_rgb(255,0,0,0.5)
+
+            for i in gegner:
+                dx = x - i.get_x()
+                dy = y - i.get_y()
+
+                dist = math.sqrt(dx*dx + dy*dy)
+    
+                if dist <= attack_radius - i.get_radius():
+                    i.lose_life(50)
+
+            # player vor den Attack-Circle schieben
+            self.to_front()
+
+    
+    def is_hit(self, jetzt, n):
+        if jetzt - self._last_hit >= cooldown:
+            self._last_hit = jetzt
+            self.lose_hp(50)
+        
+
+
+        
+
