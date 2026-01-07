@@ -1,4 +1,4 @@
-from algoviz.svg import SVGView, Circle, Rect, Text
+from algoviz.svg import SVGView, Circle, Rect, Text, Image
 from random import randrange
 import random
 
@@ -135,10 +135,11 @@ class Map:
         for i in range(self.length):
             for j in range(self.height):
                 if self.layout[j][i] == 1:
-                    rect = Rect(i*w, j*h, w, h, view)
-                    rect.set_fill("grey")
-                    rect.set_stroke_width(3)
-                    self.walls.append(rect)
+                    #rect = Rect(i*w, j*h, w, h, view)
+                    #rect.set_fill("grey")
+                    #rect.set_stroke_width(3)
+                    wall = Image("Wall.png", i*w, j*h, w, h, view)
+                    self.walls.append(wall)
                 if self.layout[j][i] == 2:
                     rect = Rect(i*w, j*h, w, h, view)
                     rect.set_fill_rgb( 255, 0, 0, 0.5)
