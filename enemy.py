@@ -6,13 +6,13 @@ from map import Map
 
 class Enemy:
 
-    def __init__(self, x, y, radius, raum, feld, lifes = 2, speed = 6):
+    def __init__(self, x, y, radius, raum, feld, hp = 100, speed = 6):
         self.raum = raum
         self.radius = radius
         self._kreis = Circle(x, y, radius, raum)
         self._kreis.set_fill('orange')
         self.feld = feld
-        self.lifes = lifes
+        self.hp = hp
         self.speed = speed
         self._d_x = 0
         self._d_y = 0
@@ -199,8 +199,8 @@ class Enemy:
         self._kreis.move_to(x,y)
 
     def lose_life(self, n):
-        self.lifes = self.get_lifes() - n
-        return self.lifes
+        self.hp = self.get_hp() - n
+        
 
     
         
@@ -214,8 +214,8 @@ class Enemy:
         return self._d_x
     def get_dy(self):
         return self._d_y
-    def get_lifes(self):
-        return self.lifes
+    def get_hp(self):
+        return self.hp
     def get_speed(self):
         return self.speed
     
@@ -229,8 +229,8 @@ class Enemy:
         self._d_x = d_x
     def set_dy(self, d_y):
         self._d_y = d_y
-    def set_lifes(self, lifes):
-        self.lifes = lifes
+    def set_hp(self, lifes):
+        self.hp = lifes
     def set_speed(self, speed):
         self.speed = speed
 
