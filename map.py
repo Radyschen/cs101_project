@@ -96,7 +96,7 @@ class Map:
     def create_lobby(self):
         self.layout =  [
             [1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 0, 0, 0, 0, 0, 0, 1],
+            [1, 3, 0, 0, 0, 0, 0, 1],
             [1, 0, 1, 1, 0, 1, 0, 1],
             [1, 0, 1, 0, 0, 1, 0, 1],
             [1, 0, 0, 0, 0, 1, 0, 1],
@@ -144,4 +144,12 @@ class Map:
                     rect = Rect(i*w, j*h, w, h, view)
                     rect.set_fill_rgb( 255, 0, 0, 0.5)
                     rect.set_stroke_width(1)
+                    
+                if self.layout[j][i] == 3:
+                    
+                    """
+                    rect = Rect(i*w, j*h, w, h, view)
+                    rect.set_fill_rgb( 255, 255, 0, 0.5)
+                    rect.set_stroke_width(1)
+                    """
                 
