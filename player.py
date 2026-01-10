@@ -66,7 +66,7 @@ class Player:
     def lose_hp(self, n):
         self._hp = self.get_hp() - n
 
-    def to_front_alles(self):
+    def to_front(self):
         self.healthbar_red.to_front()
         self.healthbar_green.to_front()
         self.attack_circle.to_front()

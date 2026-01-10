@@ -1,4 +1,4 @@
-from algoviz.svg import Circle
+from algoviz.svg import Circle, Rect
 from random import randrange, uniform
 import random
 import math
@@ -19,6 +19,12 @@ class Enemy:
         self.last_update = 0
         self.aggro = False
         self.last_aggro = 0
+        
+        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius()//2, raum)
+        self.healthbar_red.set_fill("red")
+                                  
+        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius()//2, raum)
+        self.healthbar_green.set_fill("green")
 
 
 
@@ -33,8 +39,22 @@ class Enemy:
                 self.last_update = curr_time
             self.move_random()
 
+        self.update_healthbar()
 
-    
+
+    def update_healthbar(self):
+        self.healthbar_red.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
+
+        self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
+        
+        self.healthbar_green.set_width((self.get_hp()/100) * (self.get_radius() * 2))
+
+
+    def remove_healthbar(self):
+        self.healthbar_green.set_fill("white")
+        self.healthbar_green.set_stroke_width(0)
+        self.healthbar_red.set_fill("white")
+        self.healthbar_red.set_stroke_width(0)
         
     def checkaggro(self, px, py, curr_time):
         if (abs(px - self.get_x()) < 150) and (abs(py - self.get_y()) < 150):
