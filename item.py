@@ -1,19 +1,20 @@
-from algoviz.svg import Circle, Rect
+from algoviz.svg import Circle, Rect, Image
 import math
 
 class Item:
 
 
-    def __init__(self, x, y, view, type,w = 20, h = 20):
+    def __init__(self, x, y, view, type, image, w = 20, h = 20,):
         self._x = x
         self._y = y
         self._width = w
         self._height = h
         self._type = type
         self._collected = False
-        self._rect = Rect(x, y, w, h, view)
-        self._rect.set_fill("lightpink")
-        self._rect.set_stroke_width(2)
+        self.image = Image(image, x, y, w, h, view)
+        #self._rect = Rect(x, y, w, h, view)
+        #self._rect.set_fill("lightpink")
+        #self._rect.set_stroke_width(2)
 
     def get_x(self):
         return self._x
@@ -31,7 +32,7 @@ class Item:
         return self._type
 
     # Prüft, ob der Spieler das Item einsammelt
-    def is_collected(self, player):
+    def is_collected(self, player, x, y, w, h, view):
         if self._collected:
             return False
 
@@ -42,7 +43,8 @@ class Item:
 
         if dist <= self._width + player.get_radius():
             self._collected = True
-            self._rect.set_fill("white")  # Item verschwinden lassen
-            self._rect.set_stroke_width(0)
+            fill = Rect( x, y, w, h, view)
+            fill.set_fill("white")  # Item verschwinden lassen
+            fill.set_stroke_width(0)
             return True
         return False
