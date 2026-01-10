@@ -263,5 +263,16 @@ class Enemy:
 
 
 
-#class Dummy(Enemy):
+class Dummy(Enemy):
+    def __init__(self, x, y, radius, raum, feld, hp = 100, speed = 6):
+        super().__init__(x, y, radius, raum, feld, hp, speed)
+        self._start_x = 500
+        self._start_y = 500
+
+    def move(self, px, py, curr_time):
+        self.update_healthbar()
+    
+    def hits_player(self, px, py):
+        pass
+    
     
