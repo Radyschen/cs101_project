@@ -10,9 +10,12 @@ class Enemy:
         self.raum = raum
         self.radius = radius
         self._kreis = Circle(x, y, radius, raum)
+        self._start_x = x
+        self._start_y = y
         self._kreis.set_fill('orange')
         self.feld = feld
         self.hp = hp
+        self.start_hp = hp
         self.speed = speed
         self._d_x = 0
         self._d_y = 0
@@ -47,7 +50,7 @@ class Enemy:
 
         self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
         
-        self.healthbar_green.set_width((self.get_hp()/100) * (self.get_radius() * 2))
+        self.healthbar_green.set_width((self.get_hp()/self.start_hp) * (self.get_radius() * 2))
 
 
     def remove_healthbar(self):
@@ -238,6 +241,10 @@ class Enemy:
         return self.hp
     def get_speed(self):
         return self.speed
+    def get_start_x(self):
+        return self._start_x
+    def get_start_y(self):
+        return self._start_y
     
     def set_x(self, x):
         self._kreis.set_x(x)

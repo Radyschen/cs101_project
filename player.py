@@ -16,7 +16,7 @@ class Player:
         self._last_attack_time = 0
         self._last_hit = 0
         self._cooldown = 0.5
-        self._hit_cooldown = 2
+        self._hit_cooldown = 3
         self.attack_circle = Circle(x,y, self.get_radius() * self._attack_radius_ratio, self._raum)
         self.attack_circle.set_fill("white")
         
