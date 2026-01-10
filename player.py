@@ -8,7 +8,7 @@ class Player:
         self._raum = raum
         self._kreis = Circle(x, y, radius, raum)
         self._kreis.set_fill("lightblue")
-        self._speed = 10
+        self._speed = 8
         self._d_x = 0
         self._d_y = 0
         self._hp = 100 # Leben/health points
