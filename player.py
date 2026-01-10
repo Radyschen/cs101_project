@@ -1,4 +1,4 @@
-from algoviz.svg import Circle, SVGView
+from algoviz.svg import Circle, SVGView, Rect
 from random import randrange
 import math
 
@@ -19,6 +19,12 @@ class Player:
         self._hit_cooldown = 2
         self.attack_circle = Circle(x,y, self.get_radius() * self._attack_radius_ratio, self._raum)
         self.attack_circle.set_fill("white")
+        
+        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius()//2, raum)
+        self.healthbar_red.set_fill("red")
+                                  
+        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius()//2, raum)
+        self.healthbar_green.set_fill("green")
 
     def get_x(self):
         return self._kreis.get_x()
@@ -60,8 +66,12 @@ class Player:
     def lose_hp(self, n):
         self._hp = self.get_hp() - n
 
-    def to_front(self):
+    def to_front_alles(self):
+        self.healthbar_red.to_front()
+        self.healthbar_green.to_front()
+        self.attack_circle.to_front()
         self._kreis.to_front()
+        
 
     def bewegen(self):
         self.attack_circle.set_fill_rgb(0,0,0,0)
@@ -71,6 +81,20 @@ class Player:
         """Bewegt die Person in x- und y-Richtung entsprechend der eigenen d_x und d_y"""
         self._kreis.move_to(self._kreis.get_x() + self._d_x, self._kreis.get_y() + self._d_y)
 
+        self.update_healthbar()
+
+
+
+    
+    def update_healthbar(self):
+        self.healthbar_red.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
+
+        self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
+        
+        self.healthbar_green.set_width((self.get_hp()/100) * (self.get_radius() * 2))
+
+
+        
     def move_to(self, x, y):
         self._kreis.move_to(x,y)
 
