@@ -17,13 +17,13 @@ class Player:
         self._last_hit = 0
         self._cooldown = 0.5
         self._hit_cooldown = 3
-        self.attack_circle = Circle(x,y, self.get_radius() * self._attack_radius_ratio, self._raum)
+        self.attack_circle = Circle(x, y, self.get_radius() * self._attack_radius_ratio, self._raum)
         self.attack_circle.set_fill("white")
         
-        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius()//2, raum)
+        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius() // 2, raum)
         self.healthbar_red.set_fill("red")
                                   
-        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius()//2, raum)
+        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius() // 2, raum)
         self.healthbar_green.set_fill("green")
 
     def get_x(self):
@@ -74,7 +74,7 @@ class Player:
         
 
     def bewegen(self):
-        self.attack_circle.set_fill_rgb(0,0,0,0)
+        self.attack_circle.set_fill_rgb(0, 0, 0, 0)
         self.attack_circle.set_stroke_width(0)
         self.attack_circle.move_to(self.get_x(), self.get_y())
         
@@ -91,7 +91,7 @@ class Player:
 
         self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
         
-        self.healthbar_green.set_width((self.get_hp()/100) * (self.get_radius() * 2))
+        self.healthbar_green.set_width((self.get_hp() / 100) * (self.get_radius() * 2))
 
 
         
@@ -196,7 +196,7 @@ class Player:
         dy = self.get_dy()
 
         radius = self._kreis.get_radius()
-        offset = math.sqrt(radius**2/2)
+        offset = math.sqrt(radius ** 2 / 2)
 
         # Koordinaten wo ich beim nächsten Schritt wäre
         next_x = x + dx
