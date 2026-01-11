@@ -5,7 +5,7 @@ import random
 class Map:
 
     def __init__(self, length, height):
-        self.layout = [[1 for col in range(height)] for row in range(length)] 
+        self.layout = [ [1 for col in range(height)] for row in range(length)] 
         self.height = height  # arrayhöhe
         self.length = length  # arraybreite
         self.walls = []
@@ -34,9 +34,9 @@ class Map:
         # random punkte
         ax = []
         ay = []
-        for i in range(self.length*2):
-            ax.append(random.randint(1,self.length - 2))
-            ay.append(random.randint(1,self.length - 2))
+        for i in range(self.length * 2):
+            ax.append(random.randint(1, self.length - 2))
+            ay.append(random.randint(1, self.length - 2))
 
         # verbinden der random punkte durch tunnel
         while len(ax) >= 2:
@@ -52,9 +52,9 @@ class Map:
         my = self.get_length() // 2
 
         self.layout[mx][my] = 0
-        self.layout[mx+1][my] = 0
-        self.layout[mx][my+1] = 0
-        self.layout[mx+1][my+1] = 0
+        self.layout[mx + 1][my] = 0
+        self.layout[mx][my + 1] = 0
+        self.layout[mx + 1][my + 1] = 0
 
 
         # gegnerfelder
@@ -83,10 +83,10 @@ class Map:
     
     def add_gegner(self, gegneranzahl, mx, my):
         while gegneranzahl > 0:
-            x = random.randint(1,self.length - 1)
-            y = random.randint(1,self.length - 1)
+            x = random.randint(1, self.length - 1)
+            y = random.randint(1, self.length - 1)
 
-            if (self.layout[x][y] == 0) and ((x != mx) and (x != mx +1)) and ((y != my) and (y != my+1)):
+            if (self.layout[x][y] == 0) and ((x != mx) and (x != mx + 1)) and ((y != my) and (y != my + 1)):
                 self.layout[x][y] = 2
                 gegneranzahl -= 1
             
@@ -138,10 +138,10 @@ class Map:
                     #rect = Rect(i*w, j*h, w, h, view)
                     #rect.set_fill("grey")
                     #rect.set_stroke_width(3)
-                    wall = Image("Wall.png", i*w, j*h, w, h, view)
+                    wall = Image("Wall.png", i * w, j * h, w, h, view)
                     self.walls.append(wall)
                 if self.layout[j][i] == 2:
-                    rect = Rect(i*w, j*h, w, h, view)
+                    rect = Rect(i * w, j * h, w, h, view)
                     rect.set_fill_rgb( 255, 0, 0, 0.5)
                     rect.set_stroke_width(1)
                     
