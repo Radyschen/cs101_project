@@ -23,10 +23,10 @@ class Enemy:
         self.aggro = False
         self.last_aggro = 0
         
-        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius()//2, raum)
+        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius() // 2, raum)
         self.healthbar_red.set_fill("red")
                                   
-        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius()//2, raum)
+        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius() // 2, raum)
         self.healthbar_green.set_fill("green")
 
 
@@ -50,7 +50,7 @@ class Enemy:
 
         self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
         
-        self.healthbar_green.set_width((self.get_hp()/self.start_hp) * (self.get_radius() * 2))
+        self.healthbar_green.set_width((self.get_hp() / self.start_hp) * (self.get_radius() * 2))
 
 
     def remove_healthbar(self):
@@ -91,7 +91,7 @@ class Enemy:
         dx = px - self.get_x()
         dy = py - self.get_y()
     
-        dist = math.sqrt(dx*dx + dy*dy)
+        dist = math.sqrt(dx * dx + dy * dy)
     
         if dist <= self.radius:
             self.set_dx(0)
@@ -191,7 +191,7 @@ class Enemy:
                 x = 0.7
         """
 
-        dir = [(0.5,0),(-0.5,0),(0,0.5),(0,-0.5),(0.75,0),(-0.75,0),(0,0.75),(0,-0.75),(0,0)]
+        dir = [(0.5,0), (-0.5,0), (0,0.5), (0,-0.5), (0.75,0), (-0.75,0),(0,0.75),(0,-0.75),(0,0)]
 
         x, y = random.choice(dir)
                 
