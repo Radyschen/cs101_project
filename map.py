@@ -60,6 +60,9 @@ class Map:
         # gegnerfelder
         self.add_gegner(gegneranzahl, mx, my)
 
+        # items
+        self.add_items(random.randint(1,2), mx, my)
+
     
     def create_tunnel(self, x1, y1, x2, y2):
         self.layout[x1][y1] = 0
@@ -87,8 +90,19 @@ class Map:
             y = random.randint(1, self.length - 1)
 
             if (self.layout[x][y] == 0) and ((x != mx) and (x != mx + 1)) and ((y != my) and (y != my + 1)):
-                self.layout[x][y] = 2
                 gegneranzahl -= 1
+                self.create_tunnel(x, y, mx, my)
+                self.layout[x][y] = 2
+
+    def add_items(self, itemanzahl, mx, my):
+        while itemanzahl > 0:
+            x = random.randint(1, self.length - 1)
+            y = random.randint(1, self.length - 1)
+
+            if (self.layout[x][y] == 0) and ((x != mx) and (x != mx + 1)) and ((y != my) and (y != my + 1)):
+                self.layout[x][y] = 3
+                itemanzahl -= 1
+                #self.create_tunnel(x, y, mx, my)
             
 
 

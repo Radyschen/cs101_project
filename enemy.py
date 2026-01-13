@@ -23,10 +23,10 @@ class Enemy:
         self.aggro = False
         self.last_aggro = 0
         
-        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius() // 2, raum)
+        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius() + 5, self.get_radius() * 2, self.get_radius() // 2, raum)
         self.healthbar_red.set_fill("red")
                                   
-        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius() // 2, raum)
+        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius() + 5, self.get_radius() * 2, self.get_radius() // 2, raum)
         self.healthbar_green.set_fill("green")
 
 
@@ -46,9 +46,9 @@ class Enemy:
 
 
     def update_healthbar(self):
-        self.healthbar_red.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
+        self.healthbar_red.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius() + 5)
 
-        self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
+        self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius() + 5)
         
         self.healthbar_green.set_width((self.get_hp() / self.start_hp) * (self.get_radius() * 2))
 

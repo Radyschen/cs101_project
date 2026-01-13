@@ -8,7 +8,7 @@ class Player:
         self._raum = raum
         self._kreis = Circle(x, y, radius, raum)
         self._kreis.set_fill("lightblue")
-        self._speed = 8
+        self._speed = 7
         self._d_x = 0
         self._d_y = 0
         self._hp = 100 # Leben/health points
@@ -20,10 +20,10 @@ class Player:
         self.attack_circle = Circle(x, y, self.get_radius() * self._attack_radius_ratio, self._raum)
         self.attack_circle.set_fill("white")
         
-        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius() // 2, raum)
+        self.healthbar_red = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius() + 5, self.get_radius() * 2, self.get_radius() // 2, raum)
         self.healthbar_red.set_fill("red")
                                   
-        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius(), self.get_radius() * 2, self.get_radius() // 2, raum)
+        self.healthbar_green = Rect(self.get_x() - self.get_radius(), self.get_y() + self.get_radius() + 5, self.get_radius() * 2, self.get_radius() // 2, raum)
         self.healthbar_green.set_fill("green")
 
     def get_x(self):
@@ -87,9 +87,9 @@ class Player:
 
     
     def update_healthbar(self):
-        self.healthbar_red.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
+        self.healthbar_red.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius() + 5)
 
-        self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius())
+        self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius() + 5)
         
         self.healthbar_green.set_width((self.get_hp() / 100) * (self.get_radius() * 2))
 

@@ -36,12 +36,12 @@ class Item:
         if self._collected:
             return False
 
-        dx = player.get_x() - self._x + self._width/2
-        dy = player.get_y() - self._y + self._height/2
+        dx = player.get_x() - (self._x + self._width/2)
+        dy = player.get_y() - (self._y + self._height/2)
 
         dist = math.sqrt(dx*dx + dy*dy)
 
-        if dist <= self._width + player.get_radius():
+        if dist <= 2 * self._width /3:
             self._collected = True
             fill = Rect( x, y, w, h, view)
             fill.set_fill("white")  # Item verschwinden lassen
