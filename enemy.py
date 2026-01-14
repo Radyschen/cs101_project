@@ -30,9 +30,8 @@ class Enemy:
         self.healthbar_green.set_fill("green")
 
 
-
-    
-    def move(self, px, py, curr_time):
+   
+    def move(self, px, py, curr_time): # movement of the enenmy, with checking if the player is close 
 
         if self.checkaggro(px, py, curr_time) or curr_time - self.last_aggro < 2:
             self.move_to_player(px, py)
@@ -45,7 +44,7 @@ class Enemy:
         self.update_healthbar()
 
 
-    def update_healthbar(self):
+    def update_healthbar(self): # updates the healthbar if a live is lost, more red if life is lost
         self.healthbar_red.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius() + 5)
 
         self.healthbar_green.move_to(self._kreis.get_x() - self.get_radius(), self._kreis.get_y() + self.get_radius() + 5)
@@ -53,13 +52,14 @@ class Enemy:
         self.healthbar_green.set_width((self.get_hp() / self.start_hp) * (self.get_radius() * 2))
 
 
-    def remove_healthbar(self):
+    def remove_healthbar(self): # removes the healthbar
         self.healthbar_green.set_fill("white")
         self.healthbar_green.set_stroke_width(0)
         self.healthbar_red.set_fill("white")
         self.healthbar_red.set_stroke_width(0)
-        
-    def checkaggro(self, px, py, curr_time):
+
+    
+    def checkaggro(self, px, py, curr_time): # checks if the player is in a ceartain radius and returns a true or false
         if (abs(px - self.get_x()) < 150) and (abs(py - self.get_y()) < 150):
             self.aggro = True
             self.last_aggro = curr_time
@@ -69,25 +69,8 @@ class Enemy:
             return False
 
 
-    
-    def move_to_player(self, px, py):
+    def move_to_player(self, px, py): # enemy follows the players movement, moves towards the player
 
-        """
-        self.set_dx(0)
-        self.set_dy(0)
-        
-        if abs(px - self.get_x()) > self.radius:
-            if px < self.get_x():
-                self.set_dx(-1)
-            else:
-                self.set_dx(1)
-                
-        if abs(py - self.get_y()) > self.radius:
-            if py < self.get_y():
-                self.set_dy(-1)
-            else:
-                self.set_dy(1)
-        """
         dx = px - self.get_x()
         dy = py - self.get_y()
     
@@ -106,14 +89,11 @@ class Enemy:
             self.check_collision(self.get_dx(), self.get_dy())
             
             self._kreis.move_to(self.get_x() + int(self.get_dx() * self.get_speed()), self.get_y() + int(self.get_dy() * self.get_speed()))
+        
 
-        
     
-        
-        
-        
-    
-    def check_collision(self, dx, dy):
+# check collison 
+    def check_collision(self, dx, dy): # controls if the enemy colides with a wall
         speed = self.get_speed()
         x = self.get_x()
         y = self.get_y()
@@ -125,10 +105,9 @@ class Enemy:
         new_y = y + dy * speed
         if self.circle_collides(x, new_y):
             self.set_dy(0)
-    
 
 
-    def circle_collides(self, x, y):
+    def circle_collides(self, x, y): #checks the collition of the circle with a wall
         r = self.radius
     
         points = [
@@ -152,7 +131,7 @@ class Enemy:
         return False
 
 
-    def is_blocked(self, x, y):
+    def is_blocked(self, x, y): # checks if there is a wall, array value is 1
         layout = self.feld.get_layout()
         rows = len(layout)
         cols = len(layout[0])
@@ -169,29 +148,11 @@ class Enemy:
         return layout[ty][tx] == 1
 
 
-
     
-    # random movement:
+# random movement:
+    def update_dir(self): #random new direction
 
-    def update_dir(self):#
-        """
-        x = random.uniform(-0.5, 0.5)
-        y = random.uniform(-0.5, 0.5)
-
-        
-        if abs(x) < abs(y):
-            if y < 0:
-                y = -0.7
-            else:
-                y = 0.7
-        else:
-            if x < 0:
-                x = -0.7
-            else:
-                x = 0.7
-        """
-
-        dir = [(0.5,0), (-0.5,0), (0,0.5), (0,-0.5), (0.75,0), (-0.75,0),(0,0.75),(0,-0.75),(0,0)]
+        dir = [(0.5, 0), (-0.5, 0), (0, 0.5), (0, -0.5), (0.75, 0), (-0.75, 0),(0, 0.75),(0, -0.75),(0, 0)]
 
         x, y = random.choice(dir)
                 
@@ -199,34 +160,34 @@ class Enemy:
         self.set_dy(y)
 
             
-    def move_random(self):
+    def move_random(self): #moves to a new postion according to speed
         self.check_collision(self.get_dx(), self.get_dy())
         
         self._kreis.move_to(self.get_x() + self.get_dx() * self.get_speed(), self.get_y() + self.get_dy() * self.get_speed())
 
 
-
-
-    def hits_player(self, px, py):
+    def hits_player(self, px, py): #causes a lose of life for the player
         dx = px - self.get_x()
         dy = py - self.get_y()
     
-        dist = math.sqrt(dx*dx + dy*dy)
+        dist = math.sqrt(dx * dx + dy  *dy)
 
         if dist <= self.get_radius() * 2:
             return True
             
         return  False
-    
-    def move_to(x,y):
-        self._kreis.move_to(x,y)
 
+        
+    def move_to(x, y):
+        self._kreis.move_to(x, y)
+
+    
     def lose_life(self, n):
         self.hp = self.get_hp() - n
         
 
-    
-        
+
+# get functions 
     def get_x(self):
         return self._kreis.get_x()
     def get_y(self):
@@ -245,7 +206,10 @@ class Enemy:
         return self._start_x
     def get_start_y(self):
         return self._start_y
+
+
     
+# set functions    
     def set_x(self, x):
         self._kreis.set_x(x)
     def set_y(self, y):
@@ -263,7 +227,7 @@ class Enemy:
 
 
 
-class Dummy(Enemy):
+class Dummy(Enemy): # Dummy subclass of Enemy 
     def __init__(self, x, y, radius, raum, feld, hp = 100, speed = 6):
         super().__init__(x, y, radius, raum, feld, hp, speed)
         self._start_x = 500
