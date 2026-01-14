@@ -154,10 +154,10 @@ class Map:
                     #rect.set_stroke_width(3)
                     wall = Image("Wall.png", i * w, j * h, w, h, view)
                     self.walls.append(wall)
-                if self.layout[j][i] == 2:
-                    rect = Rect(i * w, j * h, w, h, view)
-                    rect.set_fill_rgb( 255, 0, 0, 0.5)
-                    rect.set_stroke_width(1)
+                #if self.layout[j][i] == 2:
+                    #rect = Rect(i * w, j * h, w, h, view)
+                    #rect.set_fill_rgb( 255, 0, 0, 0.5)
+                    #rect.set_stroke_width(1)
                     
                 if self.layout[j][i] == 3:
                     
