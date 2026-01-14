@@ -4,7 +4,7 @@ import math
 class Item:
 
 
-    def __init__(self, x, y, view, type, image, w = 20, h = 20,):
+    def __init__(self, x, y, view, type, image, w = 20, h = 20):
         self._x = x
         self._y = y
         self._width = w
@@ -12,9 +12,6 @@ class Item:
         self._type = type
         self._collected = False
         self.image = Image(image, x, y, w, h, view)
-        #self._rect = Rect(x, y, w, h, view)
-        #self._rect.set_fill("lightpink")
-        #self._rect.set_stroke_width(2)
 
     def get_x(self):
         return self._x
@@ -36,14 +33,14 @@ class Item:
         if self._collected:
             return False
 
-        dx = player.get_x() - (self._x + self._width/2)
-        dy = player.get_y() - (self._y + self._height/2)
+        dx = player.get_x() - (self._x + self._width / 2)
+        dy = player.get_y() - (self._y + self._height / 2)
 
-        dist = math.sqrt(dx*dx + dy*dy)
+        dist = math.sqrt(dx * dx + dy * dy)
 
-        if dist <= 2 * self._width /3:
+        if dist <= 2 * self._width / 3:
             self._collected = True
-            fill = Rect( x, y, w, h, view)
+            fill = Rect(x, y, w, h, view)
             fill.set_fill("white")  # Item verschwinden lassen
             fill.set_stroke_width(0)
             return True
